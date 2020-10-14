@@ -1,4 +1,4 @@
-# Exiftool Commands (cheat sheet, 
+# Useful Exiftool Commands (cheat sheet / examples)
 
 Several Exiftool commands I have used to edit/sort my pictures and improve metadata. 
 Using this as my personal notepad, so to speak; might be useful for someone.
@@ -62,4 +62,5 @@ When it comes to mass editing lots of files, like shifting the date of all image
 
 ### Exiftool add CreateDate Exif Property and Copy DateTimeOriginal Exif Property Value into It
 Useful for if many pictures do not have the CreateDate exif-property, but do have the DateTimeOriginal exif-property. If you want the CreateDate exif-property to have the same value as the DateTimeOriginal exif property:
+
 `exiftool -overwrite_original '-createdate<datetimeoriginal' -r -if '(not $createdate and $datetimeoriginal)' <your directory>`
