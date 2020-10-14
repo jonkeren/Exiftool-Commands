@@ -1,8 +1,9 @@
-# Exiftool Commands
+# Exiftool Commands (cheat sheet, 
 
 Several Exiftool commands I have used to edit/sort my pictures and improve metadata. 
 Using this as my personal notepad, so to speak; might be useful for someone.
 
+When it comes to mass editing lots of files, like shifting the date of all images in a directory by two hours, nothing beats the command line. ExifTool is great for this.
 
 
 ### Exiftool show all available EXIF tags of a file
@@ -45,13 +46,20 @@ Using this as my personal notepad, so to speak; might be useful for someone.
 `exiftool -overwrite_original -makernotes= .`
 
 ### Exiftool import all image data from JSON files (from Google Takeout), and write to EXIF data of corresponding photos:
-`exiftool -v -r -d %s -tagsfromfile "%d/%F.json" "-GPSAltitude<GeoDataAltitude" "-GPSLatitude<GeoDataLatitude" "-GPSLatitudeRef<GeoDataLatitude" "-GPSLongitude<GeoDataLongitude" "-GPSLongitudeRef<GeoDataLongitude" "-ModifyDate<PhotoTakenTimeTimestamp" "-CreateDate<PhotoTakenTimeTimestamp" "-DateTimeOriginal<PhotoTakenTimeTimestamp" -ext jpg -overwrite_original`
+`exiftool -overwrite_original -v -r -d %s -tagsfromfile "%d/%F.json" "-GPSAltitude<GeoDataAltitude" "-GPSLatitude<GeoDataLatitude" "-GPSLatitudeRef<GeoDataLatitude" "-GPSLongitude<GeoDataLongitude" "-GPSLongitudeRef<GeoDataLongitude" "-ModifyDate<PhotoTakenTimeTimestamp" "-CreateDate<PhotoTakenTimeTimestamp" "-DateTimeOriginal<PhotoTakenTimeTimestamp" -ext jpg -overwrite_original`
 
 ### Exiftool find all photos that have NO Microsoft Face tag but HAVE an XMP-MWG Face tag, and add a keyword to those:
 `exiftool -r -ext jpg -overwrite_original -m -v -if "($RegionName) and (not $RegionRectangle)" -Keywords+="Has-MS-Face-but-no-XMP-face" .`
 
 ### Exiftool create a .txt file with all photos, and listing who is on which photo (face tags):
-`exiftool -T -Directory -Filename  -RegionPersonDisplayName -r -ext jpg . > PeopleTags.txt`
+`exiftool -T -Directory -Filename -RegionPersonDisplayName -r -ext jpg . > PeopleTags.txt`
 
 ### Exiftool sort photos to subfolders of Camera make and camera model
-`exiftool -r -v -v -ext jpg "-filename<[YOUR-TARGET-DIR-HERE]\${make;} ${model;}\%f.%e" .`
+`exiftool -r -v -overwrite_original -ext jpg "-filename<\${make;} ${model;}\%f.%e" .`
+
+### Exiftool Remove ALL metadata from a file
+`exiftool -overwrite_original -all= <filename>`
+
+### Exiftool add CreateDate Exif Property and Copy DateTimeOriginal Exif Property Value into It
+Useful for if many pictures do not have the CreateDate exif-property, but do have the DateTimeOriginal exif-property. If you want the CreateDate exif-property to have the same value as the DateTimeOriginal exif property:
+`exiftool -overwrite_original '-createdate<datetimeoriginal' -r -if '(not $createdate and $datetimeoriginal)' <your directory>`
