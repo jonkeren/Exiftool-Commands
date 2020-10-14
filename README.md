@@ -1,6 +1,8 @@
-# Exiftool-Commands
+# Exiftool Commands
 
 Several Exiftool commands I have used to edit/sort my pictures and improve metadata. 
+Using this as my personal notepad, so to speak; might be useful for someone.
+
 
 
 ### Exiftool show all available EXIF tags of a file
