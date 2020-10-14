@@ -3,7 +3,7 @@
 Several Exiftool commands I have used to edit/sort my pictures and improve metadata. 
 Using this as my personal notepad, so to speak; might be useful for someone.
 
-When it comes to mass editing lots of files, like shifting the date of all images in a directory by two hours, nothing beats the command line. ExifTool is great for this.
+When it comes to mass editing lots of files, nothing beats the command line. ExifTool is great for this.
 
 
 ### Exiftool show all available EXIF tags of a file
