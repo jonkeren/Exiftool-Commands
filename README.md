@@ -18,6 +18,9 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134367.jpg), for .jpgs:
 `exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}"  -ext jpg .`
 
+### Exiftool set all dates of PDF files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
+`exiftool -overwrite_original "-FileModifyDate<${filename;$_=substr($_,0,10)}" "-CreateDate<${filename;$_=substr($_,0,10)}" "-FileCreateDate<${filename;$_=substr($_,0,10)}" "-FileAccessDate<${filename;$_=substr($_,0,10)}" "-ModifyDate<${filename;$_=substr($_,0,10)}"  -ext pdf .`
+
 ### Exiftool Write all (incl. GPS location) tags FROM .mp4 files TO corresponding XMP files:
 `exiftool -v -v -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all %d%f.xmp .`
 
