@@ -25,7 +25,13 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool -v -v -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all %d%f.xmp .`
 
 ### Exiftool move all files to a directory structure "2020\05\03", without renaming the files themselves:
-`exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\%d\  .`
+`exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\%d\ .`
+
+### Exiftool move all files to a directory structure "2020\05", without renaming the files themselves:
+`exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\ .`
+
+### Exiftool move all files to a directory structure (based on month) "\05", without renaming the files themselves:
+`exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %m\ .`
 
 ### Exiftool move all files to a directory structure "2020\05\03", AND rename the files to format "20200503-134367.jpg" (Year-Month-Day--Hour-Minute-Second):
 `exiftool -v -r -d %Y\%m\%d\%Y%m%d-%H%M%S%%-c.%%e "-filename<CreateDate" .`
