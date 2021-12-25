@@ -21,6 +21,9 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool set all dates of PDF files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
 `exiftool -v -overwrite_original "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext pdf .`
 
+### Exiftool set all dates of JPG files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 blabla.jpg")
+`exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,10)}  13:00:00" "-createdate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-MetaDataDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext jpg .`
+
 ### Exiftool Write all (incl. GPS location) tags FROM .mp4 files TO corresponding XMP files:
 `exiftool -v -v -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all %d%f.xmp .`
 
