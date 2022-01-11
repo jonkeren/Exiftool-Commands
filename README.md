@@ -27,6 +27,9 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool Write all (incl. GPS location) tags FROM .mp4 files TO corresponding XMP files:
 `exiftool -v -v -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all %d%f.xmp .`
 
+### Exiftool Write all (incl. GPS location) tags FROM .xmp files TO corresponding MP4 video files:
+`exiftool -v -v -ext mp4 -ext mov -overwrite_original -tagsfromfile %d%f.xmp -xmp:all -all:all .`
+
 ### Exiftool move all files to a directory structure "2020\05\03", without renaming the files themselves:
 `exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\%d\ .`
 
