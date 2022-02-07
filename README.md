@@ -9,9 +9,6 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool show all available EXIF tags of a file
 `exiftool -G1 -a -s <filename>`
 
-### Exiftool Write all available EXIF data from .mp4 files to corresponding XMP files
-`exiftool -v -v -r -overwrite_original -ext mp4 -tagsfromfile @ -all:all -xmp:all -exif:all -iptc:all -n -srcfile %d%f.xmp -r .` 
-
 ### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134367.mp4), for .movs and .mp4s:
 `exiftool -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}" "-TrackCreateDate<${filename;$_=substr($_,0,15)}" "-MediaCreateDate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-MediaModifyDate<${filename;$_=substr($_,0,15)}" "-TrackModifyDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}" -ext mov -ext mp4 .`
 
@@ -25,10 +22,10 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,10)}  13:00:00" "-createdate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-MetaDataDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext jpg .`
 
 ### Exiftool Write all (incl. GPS location) tags FROM .mp4 files TO corresponding XMP files:
-`exiftool -v -v -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all %d%f.xmp .`
+`exiftool -v -v -r -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all -xmp:all -exif:all -composite:all -quicktime:all -iptc:all -gps:all %d%f.xmp .`
 
 ### Exiftool Write all (incl. GPS location) tags FROM .xmp files TO corresponding MP4 video files:
-`exiftool -v -v -ext mp4 -ext mov -overwrite_original -tagsfromfile %d%f.xmp -xmp:all -all:all .`
+`exiftool -v -v -r -if "not $gpslatitude" -overwrite_original -tagsfromfile %d%f.xmp -all:all -xmp:all -exif:all -composite:all -quicktime:all -iptc:all -gps:all -ext mov -ext mp4 -ext avi .`
 
 ### Exiftool move all files to a directory structure "2020\05\03", without renaming the files themselves:
 `exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\%d\ .`
