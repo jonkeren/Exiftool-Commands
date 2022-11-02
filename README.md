@@ -25,7 +25,7 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool -v -v -r -ext mp4 -overwrite_original -tagsfromfile %d%f.mp4 -all:all -xmp:all -exif:all -composite:all -quicktime:all -iptc:all -gps:all %d%f.xmp .`
 
 ### Exiftool Write all (incl. GPS location) tags FROM .xmp files TO corresponding MP4 video files:
-`exiftool -v -v -r -if "not $gpslatitude" -overwrite_original -tagsfromfile %d%f.xmp -all:all -xmp:all -exif:all -composite:all -quicktime:all -iptc:all -gps:all -ext mov -ext mp4 -ext avi .`
+`exiftool -v -r -overwrite_original -tagsfromfile %d%f.xmp -all:all -xmp:all -exif:all -composite:all -quicktime:all -iptc:all -gps:all -ext m4v -ext mov -ext mp4 -ext avi .`
 
 ### Exiftool copy all Digikam Tags list to LastKeyword and drop XPkeywords, where there is no "Locatie" keyword in XMP-dc:Subject.
 `exiftool -overwrite_original -r -if "not $XMP-dc:Subject=~/Locatie/" "-XMP-dc:Subject<XMP-digiKam:TagsList" "-XMP-microsoft:LastKeywordXMP<XMP-digiKam:TagsList" -XMP-microsoft:LastKeywordIPTC= -IPTCDigest= -IFD0:XPKeywords= -ext jpg -ext jpeg -ext mp4 -ext m4v -ext mov .`
