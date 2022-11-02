@@ -58,7 +58,7 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool -p "$directory/$filename" -r -if "(not $datetimeoriginal or $createdate)" .`
 
 ### Exiftool remove all makernotes:
-`exiftool -overwrite_original -makernotes= .`
+`exiftool -overwrite_original -makernotes:all= .`
 
 ### Exiftool import all image data from JSON files (from Google Takeout), and write to EXIF data of corresponding photos:
 `exiftool -overwrite_original -v -r -d %s -tagsfromfile "%d/%F.json" "-GPSAltitude<GeoDataAltitude" "-GPSLatitude<GeoDataLatitude" "-GPSLatitudeRef<GeoDataLatitude" "-GPSLongitude<GeoDataLongitude" "-GPSLongitudeRef<GeoDataLongitude" "-ModifyDate<PhotoTakenTimeTimestamp" "-CreateDate<PhotoTakenTimeTimestamp" "-DateTimeOriginal<PhotoTakenTimeTimestamp" -ext jpg -overwrite_original`
