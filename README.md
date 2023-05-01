@@ -45,6 +45,10 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool move all files to a directory structure (based on month) "\05", without renaming the files themselves:
 `exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %m\ .`
 
+### Exiftool move all video files from the Pictures folder to the Videos folder, under a directory structure "2020\05\03".
+`cd "C:\Users\<USER>\OneDrive\Afbeeldingen\Eigen foto's"`
+`exiftool -r -v -ext mp4 -ext mov -ext m4v "-Directory<C:\Users\<USER>\OneDrive\Video's\$CreateDate" -d %Y\%m\%d\ .`
+
 ### Exiftool move all files to a directory structure "2020\05\03", AND rename the files to format "20200503-134367.jpg" (Year-Month-Day--Hour-Minute-Second):
 `exiftool -v -r -d %Y\%m\%d\%Y%m%d-%H%M%S%%-c.%%e "-filename<CreateDate" .`
 
