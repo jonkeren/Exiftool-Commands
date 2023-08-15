@@ -18,7 +18,7 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool rename file to CreateDate of images. This will change the file names to something like "20221028-150847.jpg".
 `exiftool "-filename <${CreateDate}.%e" -d %Y%m%d-%H%M%S .`
 
-### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134367.jpg), for .jpgs:
+### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134317.jpg), for .jpgs:
 `exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}"  -ext jpg .`
 
 ### Exiftool set all dates of PDF files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
