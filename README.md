@@ -78,10 +78,10 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool -r -ext jpg -overwrite_original -m -v -if "($RegionName) and (not $RegionRectangle)" -Keywords+="Has-MS-Face-but-no-XMP-face" .`
 
 ### Exiftool find all photos that have NO Microsoft (MXP-MP) Face tag but HAVE a name in the Digikam /Mensen/ tree:
-`exiftool -p "$directory/$filename" -r -if "($XMP-digiKam:TagsList=~/NAME/i) and (not $RegionPersonDisplayName=~/NAME/i)" .`
+`exiftool -p "$directory/$filename" -r -if "($XMP-digiKam:TagsList=~/INSERT-NAME-HERE/i) and (not $RegionPersonDisplayName=~/INSERT-NAME-HERE/i)" .`
 
 ### Exiftool find all photos that have NO Microsoft (MXP-MP) Face tag but HAVE a name in the Digikam /Mensen/ tree and add a tag to those:
-`exiftool -r -ext jpg -overwrite_original -m -if "($XMP-digiKam:TagsList=~/NAME/i) and (not $RegionPersonDisplayName=~/NAME/i)" -XMP-digiKam:TagsList+="Check" .`
+`exiftool -r -ext jpg -overwrite_original -m -if "($XMP-digiKam:TagsList=~/INSERT-NAME-HERE/i) and (not $RegionPersonDisplayName=~/INSERT-NAME-HERE/i)" -XMP-digiKam:TagsList+="Check" .`
 
 ### Exiftool create a .txt file with all photos, and listing who is on which photo (face tags):
 `exiftool -T -Directory -Filename -RegionPersonDisplayName -r -ext jpg . > PeopleTags.txt`
