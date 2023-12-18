@@ -96,3 +96,10 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 Useful for if many pictures do not have the CreateDate exif-property, but do have the DateTimeOriginal exif-property. If you want the CreateDate exif-property to have the same value as the DateTimeOriginal exif property:
 
 `exiftool -overwrite_original '-createdate<datetimeoriginal' -r -if '(not $createdate and $datetimeoriginal)' <your directory>`
+
+### Exiftool batch copy ALL tags from .MOV to .MP4 video files after converting with ffmpeg
+The .movs and .mp4s should be in the same directory with the same file name, only a different extension
+
+`exiftool -v -tagsfromfile %d%f.mov "-all:all>all:all" -overwrite_original -ext mp4 .`
+
+
