@@ -19,7 +19,13 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 `exiftool "-filename <${CreateDate}.%e" -d %Y%m%d-%H%M%S .`
 
 ### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134317.jpg), for .jpgs:
-`exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}"  -ext jpg .`
+`exiftool -v -overwrite_original "-ImageUniqueID<NewGUID" "-Photoshop:IPTCDigest=" "-CurrentIPTCDigest=" "-XMP-xmp:CreatorTool=" "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}"  -ext jpg .`
+
+You could also add the following to the above command to change the system file and date:
+
+`"-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}"`.
+
+Beware that this might interfere with backup software or Onedrive.
 
 ### Exiftool set all dates of PDF files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
 `exiftool -v -overwrite_original "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext pdf .`
