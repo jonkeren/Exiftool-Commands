@@ -65,16 +65,22 @@ Beware that this might interfere with backup software or Onedrive.
 ### Exiftool write current file name to Title and Comment EXIF fields:
 `exiftool -r -overwrite_original "-xpcomment<${filename" "-comment<${filename" "-title<${filename" "-xptitle<${filename" .`
 
-### Exiftool find all photos without GPS location tag:
+### Exiftool find and list all photos without GPS location tag:
 `exiftool -p "$directory/$filename" -ext jpg -q -q -r -if "not $gpslatitude" .`
 
-### Exiftool find all photos Without "createdate" EXIF tag:
+### Exiftool find and list all photos Without "createdate" EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $createdate)" .`
 
-### Exiftool find all photos Without "datetimeoriginal" EXIF tag:
+### Exiftool find and list all photos where the DateTimeOriginal does not match the file name:
+`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$DateTimeOriginal/" -p "$FileName" . `
+
+### Exiftool find and list all photos where the CreateDate does not match the file name:
+`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$CreateDate/" -p "$FileName" .`
+
+### Exiftool find and list all photos Without "datetimeoriginal" EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $datetimeoriginal)" .`
 
-### Exiftool find all photos Without any date EXIF tag:
+### Exiftool find and list all photos Without any date EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $datetimeoriginal or $createdate)" .`
 
 ### Exiftool remove all makernotes:
