@@ -72,10 +72,10 @@ Beware that this might interfere with backup software or Onedrive.
 `exiftool -p "$directory/$filename" -r -if "(not $createdate)" .`
 
 ### Exiftool find and list all photos where the DateTimeOriginal does not match the file name:
-`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$DateTimeOriginal/" -p "$FileName" . `
+`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$DateTimeOriginal/" -p "$directory/$filename" . `
 
 ### Exiftool find and list all photos where the CreateDate does not match the file name:
-`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$CreateDate/" -p "$FileName" .`
+`exiftool -r -d "%Y%m%d" -if "$FileName !~ /^$CreateDate/" -p "$directory/$filename" .`
 
 ### Exiftool find and list all photos Without "datetimeoriginal" EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $datetimeoriginal)" .`
