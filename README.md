@@ -68,6 +68,9 @@ Beware that this might interfere with backup software or Onedrive.
 ### Exiftool find and list all photos without GPS location tag:
 `exiftool -p "$directory/$filename" -ext jpg -q -q -r -if "not $gpslatitude" .`
 
+### Exiftool Validate images (list all images with warnings or errors):
+`exiftool  -r -validate -warning  -a -ext:jpg .`
+
 ### Exiftool find and list all photos Without "createdate" EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $createdate)" .`
 
@@ -82,6 +85,9 @@ Beware that this might interfere with backup software or Onedrive.
 
 ### Exiftool find and list all photos Without any date EXIF tag:
 `exiftool -p "$directory/$filename" -r -if "(not $datetimeoriginal or $createdate)" .`
+
+### Exiftool REPAIR images metadata (reads all data, and writes it back - without makernotes. This fixes most common issues:
+`exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile -ExifVersion=0232 -makernotes= .`
 
 ### Exiftool remove all makernotes:
 `exiftool -overwrite_original -makernotes:all= .`
