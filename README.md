@@ -45,6 +45,11 @@ Beware that this might interfere with backup software or Onedrive.
 ### Exiftool copy all Digikam Tags list to LastKeyword and drop XPkeywords, where there is no "Locatie" keyword in XMP-dc:Subject.
 `exiftool -overwrite_original -r -if "not $XMP-dc:Subject=~/Locatie/" "-XMP-dc:Subject<XMP-digiKam:TagsList" "-XMP-microsoft:LastKeywordXMP<XMP-digiKam:TagsList" -XMP-microsoft:LastKeywordIPTC= -IPTCDigest= -IFD0:XPKeywords= -ext jpg -ext jpeg -ext mp4 -ext m4v -ext mov .`
 
+### Exiftool add (prepend) DateTimeOriginal to the file name
+This renames files from the base name to YYYYMMDD-HHMMSS-(file name). So it prepends the date taken.
+
+`exiftool -v -overwrite_original "-filename <${DateTimeOriginal}-$filename" -d %Y%m%d-%H%M%S -ext jpg -ext jpeg .`
+
 ### Exiftool move all files to a directory structure "2020\05\03", without renaming the files themselves:
 `exiftool -v -ext jpg -ext mp4 "-Directory<CreateDate" -d %Y\%m\%d\ .`
 
