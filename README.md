@@ -12,13 +12,13 @@ When it comes to mass editing lots of files, nothing beats the command line. Exi
 ### Exiftool validate a file and show warnings and errors
 `exiftool -validate -warning -error -a FILE`
 
-### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134310.mp4), for .movs and .mp4s:
+### Exiftool write all available date fields to EXIF data from first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134310.mp4), for .movs and .mp4s:
 `exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-FileCreateDate<${filename;$_=substr($_,0,15)}" "-FileModifyDate<${filename;$_=substr($_,0,15)}" "-TrackCreateDate<${filename;$_=substr($_,0,15)}" "-MediaCreateDate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-MediaModifyDate<${filename;$_=substr($_,0,15)}" "-TrackModifyDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}" -ext m4v -ext mov -ext mp4 .`
 
-### Exiftool rename file to CreateDate of images. This will change the file names to something like "20221028-150847.jpg".
+### Exiftool rename file from CreateDate of images. This will change the file names to something like "20221028-150847.jpg".
 `exiftool -v "-filename <${CreateDate}.%e" -d %Y%m%d-%H%M%S .`
 
-### Exiftool write all available date fields in EXIF data to first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134317.jpg), for .jpgs:
+### Exiftool write all available date fields to EXIF data from first 15 characters of the file name (f. ex. useful for files that are named like 20200503-134317.jpg), for .jpgs:
 `exiftool -v -overwrite_original "-ImageUniqueID<NewGUID" "-Photoshop:IPTCDigest=" "-CurrentIPTCDigest=" "-XMP-xmp:CreatorTool=" "-datetimeoriginal<${filename;$_=substr($_,0,15)}" "-createdate<${filename;$_=substr($_,0,15)}" "-MetaDataDate<${filename;$_=substr($_,0,15)}" "-ModifyDate<${filename;$_=substr($_,0,15)}"  -ext jpg .`
 
 You could also add the following to the above command to change the system file and date:
@@ -27,13 +27,13 @@ You could also add the following to the above command to change the system file 
 
 Beware that this might interfere with backup software or Onedrive.
 
-### Exiftool set all dates of PDF files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
+### Exiftool set all dates in PDF files from first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 Text.pdf")
 `exiftool -v -overwrite_original "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-xmp:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-pdf:ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-CreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext pdf .`
 
 ### CMD (Ghostscript one-liner) to create JPG images of PDF's in a directory; max two pages
 ```for %I in (*.pdf) do ( gswin64c.exe -dNOPAUSE -dBATCH -dNumRenderingThreads=4 -sDEVICE=jpeg -r300 -dJPEGQ=80 -dFirstPage=1 -dLastPage=2 -sOutputFile="%~nI_p%02d.jpg" "%~I" )```
 
-### Exiftool set all dates of JPG files to first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 blabla.jpg")
+### Exiftool set all dates in JPG files from first 10 characters of the file name (f. ex. useful for files that are named like "2020-03-21 blabla.jpg")
 `exiftool -v -overwrite_original "-datetimeoriginal<${filename;$_=substr($_,0,10)}  13:00:00" "-createdate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileCreateDate<${filename;$_=substr($_,0,10)}  13:00:00" "-FileModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-MetaDataDate<${filename;$_=substr($_,0,10)} 13:00:00" "-ModifyDate<${filename;$_=substr($_,0,10)} 13:00:00" "-FileAccessDate<${filename;$_=substr($_,0,10)} 13:00:00" -ext jpg .`
 
 ### Exiftool Write all (incl. GPS location) tags FROM .mp4 files TO corresponding XMP files:
